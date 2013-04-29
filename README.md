@@ -1,7 +1,7 @@
-MISC-Scripts-Python
+download_album_from_xiami_com_with_album_page_url.py
 ===================
 
-py scripts written to save life!
+a python module to download any album from xiami.com
 
 -----------
 <b>download_album_from_xiami_com_with_album_page_url.py &lt;album url of xiami.com&gt;</b>
