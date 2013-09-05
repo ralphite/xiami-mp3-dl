@@ -1,12 +1,11 @@
+#!/usr/bin/env python
+
 #-*-coding:UTF-8-*-
 
 '''
 Created on 2013-4-17
-
 @author: yadongwen
-
 usage: $0 [album url of xiami.com]
-
 '''
 
 import os
@@ -30,7 +29,7 @@ def get_songs(html, album_name, artist):
     i = 1
     for (song_id, song_name) in matches:
         h = {'track_id' : i,
-             'song_id' : song_id, 
+             'song_id' : song_id,
              'song_name' : song_name,
              'album_name' : album_name,
              'artist' : artist,
@@ -38,13 +37,13 @@ def get_songs(html, album_name, artist):
              }
         songs.append(h)
         i += 1
-    return songs 
+    return songs
 
 def get_song_download_url(song_id):
     user_agent = 'Mozilla/5.0 (compatible; MSIE 5.5; Windows NT)'
     values = {'name' : 'Michael Foord',
               'location' : 'Northampton',
-              'language' : 'Python' 
+              'language' : 'Python'
               }
     headers = {'User-Agent' : user_agent}
     data = urllib.urlencode(values)
@@ -100,13 +99,13 @@ def decode_location(code):
         l7+=1
     l9=l9.replace('+', ' ')
     return l9
-    
+
 
 def get_album_download_info(url):
     user_agent = 'Mozilla/5.0 (compatible; MSIE 5.5; Windows NT)'
     values = {'name' : 'Mic',
               'location' : 'Northa',
-              'language' : 'Pyt' 
+              'language' : 'Pyt'
               }
     headers = {'User-Agent' : user_agent}
     data = urllib.urlencode(values)
@@ -114,11 +113,11 @@ def get_album_download_info(url):
 
     response = urllib2.urlopen(req)
     html = response.read()
-    
+
     artist = get_artist(html)
     album_name = get_album_name(html)
     songs = get_songs(html, album_name, artist)
-        
+
     return {'artist' : artist,
             'album_name' : album_name,
             'songs' : songs
