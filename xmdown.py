@@ -130,8 +130,15 @@ if __name__ == '__main__':
     print album['artist'] + ' - ' + album['album_name']
 
     try:
-        os.mkdir(album['artist'])
+        if not os.path.exists('music'):
+            os.mkdir('music')
+        os.chdir('music')
+        if not os.path.exists(album['artist']):
+            os.mkdir(album['artist'])
         os.chdir(album['artist'])
+        if os.path.exists(album['album_name']):
+            print 'Album ' + album['album_name'] + ' already exists. Remove it to download again.'
+            sys.exit(-1)
         os.mkdir(album['album_name'])
         os.chdir(album['album_name'])
         for song in album['songs']:
@@ -154,6 +161,7 @@ if __name__ == '__main__':
 
             urllib.urlretrieve(song['download_url'], mp3_filename)
 
+        os.chdir('..')
         os.chdir('..')
         os.chdir('..')
     except Exception, e:
