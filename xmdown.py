@@ -15,6 +15,8 @@ import urllib
 import urllib2
 import math
 from ID3 import *
+import os.path
+import time
 
 def get_artist(html):
     m = re.search('<a href="/artist/\d+">([^<]+)<', html)
@@ -160,8 +162,12 @@ if __name__ == '__main__':
             mp3_filename = mp3_filename.replace('\'', '')
             print mp3_filename + ' - ' + song['download_url'] + '...downloading'
 
+            #download the mp3
             urllib.urlretrieve(song['download_url'], mp3_filename)
 
+            #add id3 tags
+            while not os.path.exists(mp3_filename):
+                time.sleep(1)
             id3info = ID3(mp3_filename)
             id3info['TITLE'] = song['song_name']
             id3info['ARTIST'] = album['artist']
